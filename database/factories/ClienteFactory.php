@@ -17,7 +17,7 @@ class ClienteFactory extends Factory
     public function definition(): array
     {
         return [
-            "clt_correo" => fake()->freeEmail(),
+            "clt_correo" => fake()->unique()->freeEmail(),
             "password" => "string"
         ];
     }

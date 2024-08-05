@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TipoVehiculo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TipoServicio>
  */
-class TipoVehiculoFactory extends Factory
+class TipoServicioFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class TipoVehiculoFactory extends Factory
     public function definition(): array
     {
         return [
-            "tpv_nombre" => fake()->unique()->word()
+            "tps_nombre" => fake()->unique()->word()
         ];
     }
 }

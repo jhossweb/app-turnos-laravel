@@ -18,7 +18,7 @@ class MarcaFactory extends Factory
     public function definition(): array
     {
         return [
-            "mrc_nombre" => fake()->word(),
+            "mrc_nombre" => fake()->unique()->word(),
             "tpv_id" => TipoVehiculo::inRandomOrder()->first()->id
         ];
     }
