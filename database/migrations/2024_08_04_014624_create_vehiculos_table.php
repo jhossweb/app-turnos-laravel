@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('vhl_year');
             
             $table->unsignedBigInteger('tpv_id');
+            $table->unsignedBigInteger("cliente_id");
             
             $table->foreign('tpv_id')->references('id')->on('tipo_vehiculos');
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             
 
             $table->timestamps();

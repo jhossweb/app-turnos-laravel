@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cliente;
 use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\TipoVehiculo;
@@ -20,6 +21,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
+        Cliente::factory(5)->create();
 
         TipoVehiculo::factory(2)->create();
         Marca::factory(5)->create();

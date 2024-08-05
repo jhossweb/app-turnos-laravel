@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Cliente;
 use App\Models\TipoVehiculo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,9 +19,10 @@ class VehiculoFactory extends Factory
     public function definition(): array
     {
         return [
-            "vhl_placa" => fake()->regexify('[A-Z]{5} - [0-4]{4}'),
+            "vhl_placa" => fake()->regexify('[A-Z]{5}-[0-4]{4}'),
             "vhl_year" => fake()->year(),
-            "tpv_id" => TipoVehiculo::inRandomOrder()->first()->id
+            "tpv_id" => TipoVehiculo::inRandomOrder()->first()->id,
+            "cliente_id" => Cliente::inRandomOrder()->first()->id
         ];
     }
 }

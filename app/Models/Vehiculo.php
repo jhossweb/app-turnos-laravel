@@ -13,11 +13,16 @@ class Vehiculo extends Model
     protected $fillable = [
         'vhl_placa',
         'vhl_year',
-        'tpv_id'
+        'tpv_id',
+        'cliente_id'
     ];
 
    
     function tpv(): BelongsTo {
         return $this->belongsTo("\App\Models\TipoVehiculo", "tpv_id");
+    }
+
+    function cliente(): BelongsTo {
+        return $this->belongsTo("\App\Models\Cliente");
     }
 }
