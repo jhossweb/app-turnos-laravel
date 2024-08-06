@@ -9,6 +9,7 @@ use App\Models\Modelo;
 use App\Models\Servicio;
 use App\Models\TipoServicio;
 use App\Models\TipoVehiculo;
+use App\Models\Turno;
 use App\Models\User;
 use App\Models\Vehiculo;
 
@@ -35,6 +36,8 @@ class DatabaseSeeder extends Seeder
         TipoServicio::factory(5)->create();
         Mecanico::factory(10)->create();
         Servicio::factory(15)->create();
+
+        Turno::factory(9)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',

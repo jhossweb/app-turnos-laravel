@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Servicio extends Model
 {
@@ -33,5 +34,9 @@ class Servicio extends Model
 
     function cliente(): BelongsTo {
         return $this->belongsTo("App\Models\Cliente");
+    }
+
+    function turnos(): HasMany {
+        return $this->hasMany("App\Models\Turno");
     }
 }

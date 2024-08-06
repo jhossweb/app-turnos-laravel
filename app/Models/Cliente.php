@@ -19,4 +19,8 @@ class Cliente extends Model
     function servicios(): HasMany {
         return $this->hasMany("App\Models\Servicio");
     }
+
+    function turnos(): HasMany {
+        return $this->hasMany("App\Models\Turno");
+    }
 }
