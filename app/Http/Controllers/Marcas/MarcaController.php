@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Marcas;
 
 use App\Http\Controllers\Controller;
 use App\Models\Marca;
+use App\Models\TipoVehiculo;
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller
@@ -13,7 +14,8 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        return view('marcas.index');
+        $marcas = Marca::with("tpv")->get();
+        return view('marcas.index', compact('marcas'));
     }
 
     /**
@@ -21,7 +23,8 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        return view('marcas.create');
+        $tpvs = TipoVehiculo::all();
+        return view('marcas.create', compact('tpvs'));
     }
 
     /**
@@ -29,7 +32,10 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        $model = Marca::create($request->all());
+        $marcas = Marca::create($request->all());
+        if(!$marcas) return redirect()->route("marcas.create")->with("error", "Error al crear la Marca");
+
+        return redirect()->route("marcas.index")->with("success", "Creación de Marca");
     }
 
     /**
@@ -37,7 +43,8 @@ class MarcaController extends Controller
      */
     public function show(Marca $marca)
     {
-        //
+        $marca->with("tpv")->get();
+        return view("marcas.show", compact('marca'));
     }
 
     /**
@@ -45,7 +52,9 @@ class MarcaController extends Controller
      */
     public function edit(Marca $marca)
     {
-        //
+        $tpvs = TipoVehiculo::all();
+        $marca->with("tpv")->get();
+        return view("marcas.edit", compact('marca', 'tpvs'));
     }
 
     /**
@@ -53,7 +62,11 @@ class MarcaController extends Controller
      */
     public function update(Request $request, Marca $marca)
     {
-        //
+        $mrc = $marca->update($request->all());
+        
+        if(!$mrc) return redirect()->route('marcas.edit', $mrc)->with("error", "Error al Actualizar");
+
+        return redirect()->route('marcas.show', $marca)->with("success", "Se actualizó");
     }
 
     /**
@@ -61,6 +74,9 @@ class MarcaController extends Controller
      */
     public function destroy(Marca $marca)
     {
-        //
+        $mrc = $marca->delete();
+        if(!$mrc) return redirect()->route("marcas.edit", $mrc)->with("error", "No se eliminó");
+
+        return redirect()->route("marcas.index")->with("success", "se eliminó");
     }
 }
