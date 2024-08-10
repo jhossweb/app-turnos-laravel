@@ -11,7 +11,7 @@ class TipoVehiculo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['vhl_nombre'];
+    protected $fillable = ['tpv_nombre'];
 
     function vehiculos(): HasMany {
         return $this->hasMany('\App\Models\Vehiculo', "tpv_id");

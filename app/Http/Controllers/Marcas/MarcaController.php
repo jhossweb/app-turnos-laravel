@@ -13,7 +13,7 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        //
+        return view('marcas.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        //
+        return view('marcas.create');
     }
 
     /**
@@ -29,7 +29,7 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = Marca::create($request->all());
     }
 
     /**

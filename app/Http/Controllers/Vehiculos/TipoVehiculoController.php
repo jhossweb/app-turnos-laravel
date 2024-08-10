@@ -13,7 +13,8 @@ class TipoVehiculoController extends Controller
      */
     public function index()
     {
-        //
+        $tpvs = TipoVehiculo::all();
+        return view("tipo_vehiculos.index", compact('tpvs'));
     }
 
     /**
@@ -21,7 +22,7 @@ class TipoVehiculoController extends Controller
      */
     public function create()
     {
-        //
+        return view("tipo_vehiculos.create");
     }
 
     /**
@@ -29,7 +30,11 @@ class TipoVehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tpv = TipoVehiculo::create($request->all());
+        
+        if(!$tpv) return redirect()->route("tipo-vehculos.create")->with("error", "No se guardarón los datos");
+
+        return redirect()->route("tipo-vehiculos.index")->with("success", "Se guardarón los datos");
     }
 
     /**
@@ -37,7 +42,7 @@ class TipoVehiculoController extends Controller
      */
     public function show(TipoVehiculo $tipoVehiculo)
     {
-        //
+        return view("tipo_vehiculos.show", compact('tipoVehiculo'));
     }
 
     /**
@@ -45,7 +50,7 @@ class TipoVehiculoController extends Controller
      */
     public function edit(TipoVehiculo $tipoVehiculo)
     {
-        //
+        return view("tipo_vehiculos.edit", compact('tipoVehiculo'));
     }
 
     /**
@@ -53,7 +58,10 @@ class TipoVehiculoController extends Controller
      */
     public function update(Request $request, TipoVehiculo $tipoVehiculo)
     {
-        //
+        $tpv = $tipoVehiculo->update($request->all());
+        if(!$tpv) return redirect()->route('tipo-vehiculos.edit', $tpv)->with("error", "Error al Actualizar");
+
+        return redirect()->route('tipo-vehiculos.show', $tpv)->with("success", "Se actualizó");
     }
 
     /**
