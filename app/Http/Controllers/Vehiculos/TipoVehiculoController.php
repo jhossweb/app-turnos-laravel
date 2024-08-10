@@ -69,6 +69,10 @@ class TipoVehiculoController extends Controller
      */
     public function destroy(TipoVehiculo $tipoVehiculo)
     {
-        //
+        $tpv = $tipoVehiculo->delete();
+
+        if(!$tpv) return redirect()->route('tipo-vehiculos.show', $tpv)->with("error", "Error al Eliminar");
+
+        return redirect()->route('tipo-vehiculos.index')->with("success", "Se eliminó");
     }
 }

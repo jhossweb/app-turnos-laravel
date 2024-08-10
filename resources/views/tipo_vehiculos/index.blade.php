@@ -9,6 +9,11 @@
             Nombre: {{ $tpv->tpv_nombre }}
 
             <a href="{{ route('tipo-vehiculos.edit', $tpv) }}"> editar </a>
+
+            <form action="{{ route('tipo-vehiculos.destroy', $tpv) }}" method="post">
+                @csrf()  @Method("DELETE")
+                <button type="submit"> Eliminar </button>
+            </form>
         </li>
     @endforeach
 </ul>
