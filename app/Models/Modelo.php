@@ -13,7 +13,7 @@ class Modelo extends Model
 
     protected $fillable = ['mdl_nombre', 'marca_id'];
 
-    function marcas(): BelongsTo {
+    function marca(): BelongsTo {
         return $this->belongsTo('\App\Models\Marca');
     }
 }

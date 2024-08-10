@@ -13,7 +13,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clts = Cliente::all();
+        return view("users.clientes.index", compact('clts'));
     }
 
     /**
@@ -21,7 +22,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view("users.clientes.create");
     }
 
     /**
@@ -29,7 +30,10 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $clts = Cliente::create($request->all());
+        if(!$clts) return redirect()->route("clientes.create")->with("error", "no guardó");
+
+        return redirect()->route("clientes.index")->with("success", "se guardó");
     }
 
     /**
@@ -37,7 +41,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view("users.clientes.show", compact('cliente'));
     }
 
     /**
@@ -45,7 +49,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view("users.clientes.edit", compact('cliente'));
     }
 
     /**
@@ -53,7 +57,10 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $clt = $cliente->update($request->all());
+        if(!$clt) return redirect()->route("clientes.edit")->with("error", "no se actuliazó");
+
+        return redirect()->route("clientes.index")->with("success", "se actualizó");
     }
 
     /**
@@ -61,6 +68,7 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return redirect()->route("clientes.index")->with("delete", "se eliminó");
     }
 }

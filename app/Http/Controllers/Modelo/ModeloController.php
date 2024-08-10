@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Modelo;
 
 use App\Http\Controllers\Controller;
+use App\Models\Marca;
 use App\Models\Modelo;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class ModeloController extends Controller
      */
     public function index()
     {
-        //
+        $mdls = Modelo::all();
+        return view("modelos.index", compact('mdls'));
     }
 
     /**
@@ -21,7 +23,8 @@ class ModeloController extends Controller
      */
     public function create()
     {
-        //
+        $mrcs = Marca::all();
+        return view("modelos.create", compact('mrcs'));
     }
 
     /**
@@ -29,7 +32,10 @@ class ModeloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mdls = Modelo::create($request->all());
+        if(!$mdls) return redirect()->route("modelos.create")->with("Error", "no se creó el modelo");
+
+        return redirect()->route("modelos.index")->with("success", "se creó el modelo");
     }
 
     /**
@@ -37,7 +43,8 @@ class ModeloController extends Controller
      */
     public function show(Modelo $modelo)
     {
-        //
+        
+        return view("modelos.show", compact('modelo', 'mrcs'));
     }
 
     /**
@@ -45,7 +52,10 @@ class ModeloController extends Controller
      */
     public function edit(Modelo $modelo)
     {
-        //
+        $mrcs = Marca::all();
+        $modelo->with("marca")->get();
+        dd($modelo);
+        return view("modelos.edit", compact('modelo', 'mrcs'));
     }
 
     /**
@@ -53,7 +63,10 @@ class ModeloController extends Controller
      */
     public function update(Request $request, Modelo $modelo)
     {
-        //
+        $mdls = $modelo->update($request->all());
+        if(!$mdls) return redirect()->route("modelos.edit")->with("Error", "no se actualizó el modelo");
+
+        return redirect()->route("modelos.show")->with("success", "se actualizó el modelo");
     }
 
     /**
@@ -61,6 +74,7 @@ class ModeloController extends Controller
      */
     public function destroy(Modelo $modelo)
     {
-        //
+        $modelo->delete();
+        return redirect()->route("modelos.index")->with("success", "se eliminó el modelo");
     }
 }
