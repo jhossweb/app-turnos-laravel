@@ -13,7 +13,8 @@ class TipoServicioController extends Controller
      */
     public function index()
     {
-        //
+        $tipoServicios = TipoServicio::all();
+        return view("servicios.tipoServicio.index", compact('tipoServicios'));
     }
 
     /**
@@ -21,7 +22,7 @@ class TipoServicioController extends Controller
      */
     public function create()
     {
-        //
+        return view("servicios.tipoServicio.create");
     }
 
     /**
@@ -29,7 +30,9 @@ class TipoServicioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $tps = TipoServicio::create($request->all());
+        return redirect()->route("tipo-servicios.index");
     }
 
     /**
@@ -37,7 +40,7 @@ class TipoServicioController extends Controller
      */
     public function show(TipoServicio $tipoServicio)
     {
-        //
+        return view("servicios.tipoServicio.show", compact('tipoServicio'));
     }
 
     /**
@@ -45,7 +48,7 @@ class TipoServicioController extends Controller
      */
     public function edit(TipoServicio $tipoServicio)
     {
-        //
+        return view("servicios.tipoServicio.edit", compact('tipoServicio'));
     }
 
     /**
@@ -53,7 +56,8 @@ class TipoServicioController extends Controller
      */
     public function update(Request $request, TipoServicio $tipoServicio)
     {
-        //
+        $tps = $tipoServicio->update($request->all());
+        return redirect()->route("tipo-servicios.show", compact('tps'));
     }
 
     /**
@@ -61,6 +65,7 @@ class TipoServicioController extends Controller
      */
     public function destroy(TipoServicio $tipoServicio)
     {
-        //
+        $tipoServicio->delete();
+        return redirect()->route("tipo-servicios.index");
     }
 }

@@ -10,6 +10,8 @@ class TipoServicio extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["tps_nombre"];
+
     function servicios(): HasMany {
         return $this->hasMany("App\Models\Servicio");
     }

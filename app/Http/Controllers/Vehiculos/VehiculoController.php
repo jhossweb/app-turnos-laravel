@@ -13,7 +13,8 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        //
+        $vhls = Vehiculo::with(["servicios.tipoServicio", "cliente"])->get();
+        return view("vehiculos.index", compact('vhls'));
     }
 
     /**
@@ -21,7 +22,7 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        //
+        return view("vehiculos.create");
     }
 
     /**
@@ -29,23 +30,25 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vhl = Vehiculo::create($request->all());
+
+        return view("vehiculos.show", $vhl);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Vehiculo $vehiculo)
+    public function show(Vehiculo $vhl)
     {
-        //
+        return view("vehiculos.show", $vhl);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vehiculo $vehiculo)
+    public function edit(Vehiculo $vhl)
     {
-        //
+        return view("vehiculos.edit", $vhl);
     }
 
     /**
@@ -53,14 +56,16 @@ class VehiculoController extends Controller
      */
     public function update(Request $request, Vehiculo $vehiculo)
     {
-        //
+        $vhl = $vehiculo->update($request->all());
+        return view("vehiculos.show", $vhl);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vehiculo $vehiculo)
+    public function destroy(Vehiculo $vhl)
     {
-        //
+        $vhl->delete();
+        return view("vehiculos.index");
     }
 }

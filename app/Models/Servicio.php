@@ -23,7 +23,7 @@ class Servicio extends Model
         return $this->belongsToMany("App\Models\Mecanico");
     }
 
-    function tps(): BelongsTo {
+    function tipoServicio(): BelongsTo {
         return $this->belongsTo("App\Models\TipoServicio");
     }
 

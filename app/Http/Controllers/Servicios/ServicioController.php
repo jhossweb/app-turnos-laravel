@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Servicios;
 
 use App\Http\Controllers\Controller;
 use App\Models\Servicio;
+use App\Models\TipoServicio;
 use Illuminate\Http\Request;
 
 class ServicioController extends Controller
@@ -13,7 +14,8 @@ class ServicioController extends Controller
      */
     public function index()
     {
-        //
+        $srvs = Servicio::with(["tipoServicio", "vehiculo.tpv", "vehiculo.cliente"])->get();
+        return view("servicios.servicios.index", compact('srvs'));
     }
 
     /**
@@ -21,7 +23,9 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        //
+        $tipoServicios = TipoServicio::all();
+        
+        return view("servicios.servicios.create", compact('tipoServicios'));
     }
 
     /**
