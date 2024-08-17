@@ -12,9 +12,9 @@ class Vehiculo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tpv_id',
         'vhl_placa',
         'vhl_year',
-        'tpv_id',
         'cliente_id'
     ];
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Servicios;
 use App\Http\Controllers\Controller;
 use App\Models\Servicio;
 use App\Models\TipoServicio;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServicioController extends Controller
 {
@@ -14,7 +16,11 @@ class ServicioController extends Controller
      */
     public function index()
     {
-        $srvs = Servicio::with(["tipoServicio", "vehiculo.tpv", "vehiculo.cliente"])->get();
+        $srvs = Servicio::with(["tipoServicio", "vehiculo.tpv", "vehiculo.cliente"])
+                ->whereHas("vehiculo.cliente", function ($query) { 
+                    $query->where("id", Auth::guard('clientes')->user()->id); 
+                })
+                ->get();
         return view("servicios.servicios.index", compact('srvs'));
     }
 
@@ -24,8 +30,9 @@ class ServicioController extends Controller
     public function create()
     {
         $tipoServicios = TipoServicio::all();
+        $vehiculos = Vehiculo::with("tpv")->where("cliente_id", Auth::guard("clientes")->user()->id)->get();
         
-        return view("servicios.servicios.create", compact('tipoServicios'));
+        return view("servicios.servicios.create", compact('tipoServicios', 'vehiculos'));
     }
 
     /**
@@ -33,7 +40,9 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $srv = Servicio::create($request->all());
+        return view("servicios.servicios.show", compact('srv'));
     }
 
     /**
@@ -41,7 +50,7 @@ class ServicioController extends Controller
      */
     public function show(Servicio $servicio)
     {
-        //
+        return view("servicios.servicios.show", compact('servicio'));
     }
 
     /**
@@ -49,7 +58,8 @@ class ServicioController extends Controller
      */
     public function edit(Servicio $servicio)
     {
-        //
+        
+        return view("servicios.servicios.edit", compact('servicio'));
     }
 
     /**
@@ -57,7 +67,8 @@ class ServicioController extends Controller
      */
     public function update(Request $request, Servicio $servicio)
     {
-        //
+        $srv = $servicio->update($request->all());
+        return view("servicios.servicios.show", compact('srv'));
     }
 
     /**
@@ -65,6 +76,7 @@ class ServicioController extends Controller
      */
     public function destroy(Servicio $servicio)
     {
-        //
+        $servicio->delete();
+        return redirect()->route("servicios.index");
     }
 }

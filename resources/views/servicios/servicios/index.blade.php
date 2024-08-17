@@ -1,3 +1,7 @@
+
+<a href="{{ route('servicios.create') }}"> Crear </a>
+{{ auth("clientes")->user()->clt_correo }}
+
 @foreach($srvs as $srv)
     <li>
         <strong> Nombre Servicio </strong> : {{ $srv->tipoServicio->tps_nombre }} - 

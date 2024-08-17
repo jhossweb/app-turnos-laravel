@@ -22,7 +22,9 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        return view("vehiculos.create");
+        $tipoVehiculos = Vehiculo::with("tpv")->get();
+        
+        return view("vehiculos.create", compact('tipoVehiculos'));
     }
 
     /**
