@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vehiculos;
 
 use App\Http\Controllers\Controller;
+use App\Models\TipoVehiculo;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        $tipoVehiculos = Vehiculo::with("tpv")->get();
+        $tipoVehiculos = TipoVehiculo::all();
         
         return view("vehiculos.create", compact('tipoVehiculos'));
     }
@@ -34,7 +35,7 @@ class VehiculoController extends Controller
     {
         $vhl = Vehiculo::create($request->all());
 
-        return view("vehiculos.show", $vhl);
+        return redirect()->route("vehiculos.index");
     }
 
     /**

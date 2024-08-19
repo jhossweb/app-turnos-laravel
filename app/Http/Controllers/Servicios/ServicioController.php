@@ -42,7 +42,7 @@ class ServicioController extends Controller
     {
         
         $srv = Servicio::create($request->all());
-        return view("servicios.servicios.show", compact('srv'));
+        return redirect()->route("servicios.index");
     }
 
     /**
