@@ -9,6 +9,8 @@ use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Events\GenerarTurnoEvent;
+
 class ServicioController extends Controller
 {
     /**
@@ -40,8 +42,9 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
-        
         $srv = Servicio::create($request->all());
+        GenerarTurnoEvent::dispatch($srv);
+        
         return redirect()->route("servicios.index");
     }
 

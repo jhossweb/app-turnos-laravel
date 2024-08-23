@@ -10,6 +10,8 @@ class Turno extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["cliente_id", "servicio_id", "estado"];
+
     function servicio(): BelongsTo {
         return $this->belongsTo("App\Models\Servicio");
     }
