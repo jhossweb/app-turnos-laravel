@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Servicio;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,7 +18,7 @@ class GenerarTurnoEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public $service){}
+    public function __construct(public Servicio $service){}
 
     /**
      * Get the channels the event should broadcast on.

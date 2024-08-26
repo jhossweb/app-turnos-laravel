@@ -13,7 +13,9 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        //
+        $turnos = Turno::with(["servicio.cliente", "servicio.vehiculo"])->get();
+        
+        return view("turnos.index", compact("turnos"));
     }
 
     /**

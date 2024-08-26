@@ -44,7 +44,7 @@ class ServicioController extends Controller
     {
         $srv = Servicio::create($request->all());
         GenerarTurnoEvent::dispatch($srv);
-        
+        dd("creacion de turno");
         return redirect()->route("servicios.index");
     }
 

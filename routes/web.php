@@ -7,6 +7,7 @@ use App\Http\Controllers\Marcas\MarcaController;
 use App\Http\Controllers\Modelo\ModeloController;
 use App\Http\Controllers\Servicios\ServicioController;
 use App\Http\Controllers\Servicios\TipoServicioController;
+use App\Http\Controllers\Turno\TurnoController;
 use App\Http\Controllers\Users\ClienteController;
 use App\Http\Controllers\Vehiculos\TipoVehiculoController;
 use App\Http\Controllers\Vehiculos\VehiculoController;
@@ -28,3 +29,6 @@ Route::post("/signup", [AuthClienteController::class, "register"])->name("auth.c
 Route::get("/signin", [AuthClienteController::class, "signin"])->name("auth.cliente.signin");
 Route::post("/signin", [AuthClienteController::class, "login"])->name("auth.cliente.login");
 Route::post("/logout", [AuthClienteController::class, "logout"])->name("auth.cliente.logout");
+
+
+Route::resource("turnos", TurnoController::class);

@@ -22,9 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       Event::listen(
-        GenerarTurnoEvent::class,
-        GenerarTurnoListener::class
-       );
+    //    Event::listen(
+    //     GenerarTurnoEvent::class,
+    //     GenerarTurnoListener::class
+    //    );
     }
 }
