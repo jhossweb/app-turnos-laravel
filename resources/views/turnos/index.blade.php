@@ -5,5 +5,6 @@
     <strong> Tipo de Vehículo: </strong> {{ $turno->servicio->vehiculo->tpv->tpv_nombre }} - 
     <strong> Tipo de Servicio: </strong> {{ $turno->servicio->tipoServicio->tps_nombre }} - 
     <strong> Precio por Servicio: </strong> {{ $turno->servicio->srv_precio }}
+    <strong> Estado: </strong> {{ $turno->estado }}
 </li>
 @endforeach
